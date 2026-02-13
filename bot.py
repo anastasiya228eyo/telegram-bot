@@ -37,21 +37,21 @@ async def chat(message: types.Message):
 
      text = message.text.lower()
 
-        
+    if text.startszitch("погрда ")    
             city = text[7:].strip()
-         try:
-              async with python_weather.Client() as client:
+            try:
+               async with python_weather.Client() as client:
                    weather = await client.get(city)
 
                temp = weather.temperature
                desc = weather.description.lower()
                desc = WEATHER_TRANSLATE.get(desc, desc)
 
-                await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
+               await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
 
-          except Exception:
+            except Exception:
                await message.reply("Не смог найти такой город")
-          return
+            return
 
     if "спасибо" in text:
         await message.reply("в кармашек не положишь")
