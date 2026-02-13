@@ -59,7 +59,7 @@ async def chat(message: types.Message):
 
             await message.reply(f"Сейчас в городе {city.title()} {desc_ru}, {temp}°C")
 
-        except Exeption as e:
+        except Exception as e:
             await message.reply(f"error: {e}")
 
 async def main():
