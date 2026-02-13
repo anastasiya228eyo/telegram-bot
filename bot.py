@@ -46,21 +46,22 @@ async def chat(message: types.Message):
     if text == "да":
         await message.reply("пизда")
 
-    if text.startswith("погода "):
-        city = text.replace("погода ", "", 1)
+    if message.text.lower().startswith("погода "):
+    city = message.text[7:].strip()
 
-        try:
-            async with python_weather.Client() as client:
-                weather = await client.get(city)
+    try:
+        async with python_weather.Client() as client:
+            weather = await client.get(city)
 
-            temp = weather.temperature
-            desc = weather.description.lower()
-            desc = WEATHER_TRANSLATE.get(desc, desc)
+        temp = weather.temperature
+        desc = weather.description.lower()
+        desc = WEATHER_TRANSLATE.get(desc, desc)
 
-            await message.reply(f"Сейчас в городе {city.title()} {desc_ru}, {temp}°C")
+        await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
 
-        except Exception as e:
-            await message.reply(f"error: {e}")
+    except Exception:
+        await message.reply("Не смог найти такой город")
+
 
 async def main():
    await dp.start_polling(bot)   
