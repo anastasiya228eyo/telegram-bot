@@ -35,7 +35,7 @@ async def chat(message: types.Message):
     if not message.text:
         return
 
-     text = message.text.lower()
+    text = message.text.lower()
 
     if text.startszitch("погрда ")    
             city = text[7:].strip()
