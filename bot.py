@@ -34,7 +34,7 @@ async def chat(message: types.Message):
 
         try:
             async with python_weather.Client() as client:
-            weather = await client.get(city)
+                weather = await client.get(city)
 
             temp = weather.temperature
             desc = weather.description
