@@ -41,7 +41,7 @@ async def chat(message: types.Message):
 
             await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
 
-         except:
+        except:
             await message.reply("не смог найти такой город")
 
 async def main():
