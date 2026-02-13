@@ -1,5 +1,5 @@
 import asyncio
-import python-weather
+import python_weather
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
