@@ -1,6 +1,23 @@
 import asyncio
 import python_weather
 
+WEATHER_TRANSLATE = {
+    "clear": "ясно",
+    "sunny": "солнечно",
+    "partly cloudy": "переменная облачность",
+    "cloudy": "облачно",
+    "overcast": "пасмурно",
+    "mist": "туман",
+    "fog": "туман",
+    "light rain": "небольшой дождь",
+    "rain": "дождь",
+    "heavy rain": "сильный дождь",
+    "snow": "снег",
+    "light snow": "небольшой снег",
+    "heavy snow": "сильный снег",
+    "thunderstorm": "гроза"
+}
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
@@ -37,9 +54,10 @@ async def chat(message: types.Message):
                 weather = await client.get(city)
 
             temp = weather.temperature
-            desc = weather.description
+            desc = weather.description.lower()
+            desc = WEATHER_TRANSLATE.get(desc, desc)
 
-            await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
+            await message.reply(f"Сейчас в городе {city.title()} {desc_ru}, {temp}°C")
 
         except:
             await message.reply("не смог найти такой город")
