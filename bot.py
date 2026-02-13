@@ -1,4 +1,6 @@
 import asyncio
+import python-weather
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
@@ -27,6 +29,20 @@ async def chat(message: types.Message):
     if text == "да":
         await message.reply("пизда")
 
+    if text.startswith("погода "):
+    city = text.replace("погода ", "", 1)
+
+    try:
+        async with python_weather.Client() as client:
+            weather = await client.get(city)
+
+        temp = weather.temperature
+        desc = weather.description
+
+        await message.reply(f"Сейчас в городе {city.title()} {desc}, {temp}°C")
+
+    except:
+        await message.reply("не смог найти такой город")
 
 async def main():
    await dp.start_polling(bot)   
