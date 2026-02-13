@@ -37,7 +37,7 @@ async def chat(message: types.Message):
 
     text = message.text.lower()
 
-    if text.startszitch("погрда ")    
+    if text.startswitch("погрда ")    
             city = text[7:].strip()
             try:
                async with python_weather.Client() as client:
