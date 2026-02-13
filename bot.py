@@ -59,8 +59,8 @@ async def chat(message: types.Message):
 
             await message.reply(f"Сейчас в городе {city.title()} {desc_ru}, {temp}°C")
 
-        except:
-            await message.reply("не смог найти такой город")
+        except Exeption as e:
+            await message.reply(f"error: {e}")
 
 async def main():
    await dp.start_polling(bot)   
